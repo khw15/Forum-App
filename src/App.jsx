@@ -1,35 +1,116 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Route, Routes } from 'react-router-dom';
+import { asyncPreloadProcess } from './states/isPreload/action';
+import { asyncUnsetAuthUser } from './states/authUser/action';
+import Loading from './components/Loading';
+import Header from './components/Header';
+import HomePage from './pages/HomePage';
+import DetailPage from './pages/DetailPage';
+import LeaderboardPage from './pages/LeaderboardPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import AddThreadPage from './pages/AddThreadPage';
+import Footer from './components/Footer';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const { authUser = null, isPreload = false } = useSelector(
+    (states) => states,
+  );
+  const dispatch = useDispatch();
+  const onLogout = () => dispatch(asyncUnsetAuthUser());
+
+  useEffect(() => {
+    dispatch(asyncPreloadProcess());
+  }, [dispatch]);
+
+  if (isPreload) {
+    return null;
+  }
+
+  if (authUser === null) {
+    return (
+      <div className="bg-gray-100">
+        <Header />
+        <Loading />
+        <main className="bg-white container m-auto min-h-screen max-w-3xl py-24 p-10">
+          <Routes>
+            <Route
+              path="/"
+              element={<HomePage />}
+            />
+            <Route
+              path="/threads"
+              element={<HomePage />}
+            />
+            <Route
+              path="/threads/:id"
+              element={<DetailPage authUser={authUser} />}
+            />
+            <Route
+              path="/leaderboards"
+              element={<LeaderboardPage />}
+            />
+            <Route
+              path="/login"
+              element={<LoginPage />}
+            />
+            <Route
+              path="/register"
+              element={<RegisterPage />}
+            />
+          </Routes>
+        </main>
+        <Footer
+          authUser={authUser}
+          logout={onLogout}
+        />
+      </div>
+    );
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="bg-gray-100">
+      <Header />
+      <Loading />
+      <main className="bg-white container m-auto min-h-screen max-w-3xl py-24 p-10">
+        <Routes>
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
+          <Route
+            path="/threads"
+            element={<HomePage />}
+          />
+          <Route
+            path="/threads/:id"
+            element={<DetailPage authUser={authUser} />}
+          />
+          <Route
+            path="/threads/add"
+            element={<AddThreadPage />}
+          />
+          <Route
+            path="/leaderboards"
+            element={<LeaderboardPage />}
+          />
+          <Route
+            path="/login"
+            element={<LoginPage />}
+          />
+          <Route
+            path="/register"
+            element={<RegisterPage />}
+          />
+        </Routes>
+      </main>
+      <Footer
+        authUser={authUser}
+        logout={onLogout}
+      />
+    </div>
+  );
 }
 
-export default App
+export default App;
