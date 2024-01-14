@@ -11,7 +11,7 @@ function ThreadInput({onCreate}) {
     <form className="flex flex-col gap-2">
       <input
         type="text"
-        placeholder="Judul"
+        placeholder="Title"
         className="w-full border-2 px-2 py-1 border-gray-600 rounded-md"
         value={title}
         onChange={onTitleChange}
@@ -19,7 +19,7 @@ function ThreadInput({onCreate}) {
       />
       <input
         type="text"
-        placeholder="Kategori"
+        placeholder="Category"
         className="w-full border-2 px-2 py-1 border-gray-600 rounded-md"
         value={category}
         onChange={onCategoryChange}
@@ -35,10 +35,10 @@ function ThreadInput({onCreate}) {
       />
       <button
         type="submit"
-        className="w-full bg-[#2D3E50] text-white p-2 rounded-lg"
+        className="w-full bg-[#0891b2] text-white p-2 rounded-lg"
         onClick={() => onCreate({title, category, body})}
       >
-        Buat
+        Post Thread
       </button>
     </form>
   );
