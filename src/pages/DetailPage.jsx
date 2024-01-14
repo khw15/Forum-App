@@ -59,7 +59,7 @@ function DetailPage({authUser}) {
           {authUser ? (
             <CommentList comments={threadDetail.comments} authUser={authUser} />
           ) : (
-            <h3 className="text-xl font-semibold">(0) comment</h3>
+            <h3 className="text-xl font-semibold">0 comment</h3>
           )}
         </div>
       </div>
