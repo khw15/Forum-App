@@ -7,19 +7,13 @@ function postedAt(date) {
   const diffMinutes = Math.floor(diff / (1000 * 60));
   const diffSeconds = Math.floor(diff / 1000);
 
-  if (diffDays > 0) {
-    return `${diffDays} hari yang lalu`;
-  }
-  if (diffHours > 0) {
-    return `${diffHours} jam yang lalu`;
-  }
-  if (diffMinutes > 0) {
-    return `${diffMinutes} menit yang lalu`;
-  }
-  if (diffSeconds > 0) {
-    return `${diffSeconds} detik yang lalu`;
-  }
-  return 'just now';
+  return (
+    diffDays > 0 ? `${diffDays} days ago` :
+    diffHours > 0 ? `${diffHours} hours ago` :
+    diffMinutes > 0 ? `${diffMinutes} minutes ago` :
+    diffSeconds > 0 ? `${diffSeconds} seconds ago` :
+    'just now'
+  );
 }
 
 export default postedAt;

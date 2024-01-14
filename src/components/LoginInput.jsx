@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
 
 function LoginInput({login}) {
-  const [email, onEmailChange] = useInput('');
-  const [password, onPasswordChange] = useInput('');
+  const [email, setEmail] = useInput('');
+  const [password, setPassword] = useInput('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    login({email, password});
+  };
 
   return (
     <form className="flex flex-col w-full gap-3">
@@ -12,7 +17,7 @@ function LoginInput({login}) {
         type="email"
         placeholder="Email"
         value={email}
-        onChange={onEmailChange}
+        onChange={setEmail}
         className="border-2 border-gray-400 rounded-md p-1"
         required
       />
@@ -20,14 +25,14 @@ function LoginInput({login}) {
         type="password"
         placeholder="Password"
         value={password}
-        onChange={onPasswordChange}
+        onChange={setPassword}
         className="border-2 border-gray-400 rounded-md p-1"
         required
       />
       <button
         type="submit"
-        onClick={() => login({email, password})}
-        className="bg-slate-700 p-1 rounded-md text-white"
+        onClick={handleLogin}
+        className="bg-cyan-600 p-1 rounded-md text-white"
       >
         Login
       </button>

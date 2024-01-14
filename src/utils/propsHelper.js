@@ -12,7 +12,7 @@ const threadProp = {
   title: PropTypes.string,
   body: PropTypes.string,
   category: PropTypes.string,
-  createdAt: PropTypes.string,
+  createdAt: PropTypes.instanceOf(Date),
   ownerId: PropTypes.string,
   upVotesBy: PropTypes.arrayOf(PropTypes.string),
   downVotesBy: PropTypes.arrayOf(PropTypes.string),
@@ -23,10 +23,10 @@ const threadProp = {
 const commentProp = {
   id: PropTypes.string,
   owner: PropTypes.shape(userProp),
-  createdAt: PropTypes.string,
+  createdAt: PropTypes.instanceOf(Date),
   content: PropTypes.string,
   upVotesBy: PropTypes.arrayOf(PropTypes.string),
   downVotesBy: PropTypes.arrayOf(PropTypes.string),
 };
 
-export { userProp, threadProp, commentProp };
+export {userProp, threadProp, commentProp};

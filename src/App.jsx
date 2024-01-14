@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
-import { asyncPreloadProcess } from './states/isPreload/action';
-import { asyncUnsetAuthUser } from './states/authUser/action';
+/* eslint-disable max-len */
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Route, Routes} from 'react-router-dom';
+import {asyncPreloadProcess} from './states/isPreload/action';
+import {asyncUnsetAuthUser} from './states/authUser/action';
 import Loading from './components/Loading';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
@@ -14,8 +15,8 @@ import AddThreadPage from './pages/AddThreadPage';
 import Footer from './components/Footer';
 
 function App() {
-  const { authUser = null, isPreload = false } = useSelector(
-    (states) => states,
+  const {authUser = null, isPreload = false} = useSelector(
+      (states) => states,
   );
   const dispatch = useDispatch();
   const onLogout = () => dispatch(asyncUnsetAuthUser());

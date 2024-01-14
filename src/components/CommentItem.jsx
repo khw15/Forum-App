@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import parse from 'html-react-parser';
 import {useDispatch} from 'react-redux';
@@ -25,12 +26,21 @@ function CommentItem({
   authUser,
 }) {
   const dispatch = useDispatch();
+
   const onUpVoteComment = () => {
-    if (authUser) dispatch(asyncToggleUpVoteComment(id));
+    if (authUser) {
+      dispatch(asyncToggleUpVoteComment(id));
+    }
   };
+
   const onDownVoteComment = () => {
-    if (authUser) dispatch(asyncToggleDownVoteComment(id));
+    if (authUser) {
+      dispatch(asyncToggleDownVoteComment(id));
+    }
   };
+
+  const isUpVoted = upVotesBy.includes(authUser.id);
+  const isDownVoted = downVotesBy.includes(authUser.id);
 
   return (
     <div className="flex flex-col gap-3">
@@ -49,28 +59,12 @@ function CommentItem({
       </div>
       <p>{parse(content)}</p>
       <div className="flex gap-3">
-        <button
-          type="button"
-          className="flex items-center gap-1"
-          onClick={onUpVoteComment}
-        >
-          {upVotesBy.includes(authUser.id) ? (
-            <AiFillLike size={18} />
-          ) : (
-            <AiOutlineLike size={18} />
-          )}
+        <button type="button" className="flex items-center gap-1" onClick={onUpVoteComment}>
+          {isUpVoted ? <AiFillLike size={18} /> : <AiOutlineLike size={18} />}
           {upVotesBy.length}
         </button>
-        <button
-          type="button"
-          className="flex items-center gap-1"
-          onClick={onDownVoteComment}
-        >
-          {downVotesBy.includes(authUser.id) ? (
-            <AiFillDislike size={18} />
-          ) : (
-            <AiOutlineDislike size={18} />
-          )}
+        <button type="button" className="flex items-center gap-1" onClick={onDownVoteComment}>
+          {isDownVoted ? <AiFillDislike size={18} /> : <AiOutlineDislike size={18} />}
           {downVotesBy.length}
         </button>
       </div>

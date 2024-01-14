@@ -83,8 +83,7 @@ function ThreadItem({
         </div>
         <p>{postedAt(createdAt)}</p>
         <p>
-          Dibuat oleh
-          {' '}
+          Posted by{' '}
           <span className="font-semibold">{user.name}</span>
         </p>
       </div>

@@ -7,9 +7,9 @@ function CommentList({comments, authUser}) {
   return (
     <div className="flex flex-col gap-3">
       <h2 className="text-xl font-semibold">
-        Komentar
+        {`${comments.length}`}
         {' '}
-        {`(${comments.length})`}
+        comments
       </h2>
       <div className="flex flex-col gap-5">
         {comments.map((comment) => (

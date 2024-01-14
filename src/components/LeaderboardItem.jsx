@@ -8,7 +8,7 @@ function LeaderboardItem({avatar, name, score}) {
         <img
           src={avatar}
           className="rounded-full"
-          alt="User's avatar"
+          alt={`${name}'s avatar`}
           width={50}
           height={50}
         />

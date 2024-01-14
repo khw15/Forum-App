@@ -1,9 +1,11 @@
+import Cookies from 'js-cookie';
+
 const api = (() => {
   const BASE_URL = 'https://forum-api.dicoding.dev/v1';
 
-  const putAccessToken = (token) => localStorage.setItem('accessToken', token);
+  const putAccessToken = (token) => Cookies.set('accessToken', token);
 
-  const getAccessToken = () => localStorage.getItem('accessToken');
+  const getAccessToken = () => Cookies.get('accessToken');
 
   const _fetchWithAuth = async (url, options = {}) => fetch(url, {
     ...options,
@@ -166,8 +168,7 @@ const api = (() => {
   }
 
   async function downVoteThread(id) {
-    const response = await _fetchWithAuth(
-        `${BASE_URL}/threads/${id}/down-vote`,
+    const response = await _fetchWithAuth(`${BASE_URL}/threads/${id}/down-vote`,
         {
           method: 'POST',
         },

@@ -7,16 +7,16 @@ function LeaderboardList({leaderboards}) {
   return (
     <div className="flex flex-col gap-3">
       <div className="flex justify-between text-xl">
-        <p>Pengguna</p>
-        <p>Skor</p>
+        <p>User</p>
+        <p>Score</p>
       </div>
       <div className="flex flex-col gap-3">
-        {leaderboards.map((leaderboard) => (
+        {leaderboards.map(({user, score}) => (
           <LeaderboardItem
-            key={leaderboard.user.id}
-            avatar={leaderboard.user.avatar}
-            name={leaderboard.user.name}
-            score={leaderboard.score}
+            key={user.id}
+            avatar={user.avatar}
+            name={user.name}
+            score={score}
           />
         ))}
       </div>
