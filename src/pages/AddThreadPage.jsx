@@ -13,6 +13,7 @@ function AddThreadPage() {
     if (title && category && body) {
       dispatch(asyncAddThread({title, category, body}));
       navigate('/');
+      toast.success('Thread created');
     } else {
       toast.error('Please fill in all fields');
     }
